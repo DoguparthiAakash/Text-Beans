@@ -2,7 +2,7 @@
   <img src="logo.png" alt="Text Beans Logo" width="120"/>
 </p>
 
-<h1 align="center">☕ Text Beans</h1>
+<h1 align="center">Text Beans</h1>
 
 <p align="center"><em>A universal text editor built with Java — view and edit any file format in one place.</em></p>
 
