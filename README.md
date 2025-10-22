@@ -24,7 +24,7 @@ From code files to documents, Text Beans brings flexibility, simplicity, and ver
 ---
 
 ### 📦 Download & Development
-🔗 **[Download Text Beans (Development Build)]([https://drive.google.com/file/d/1z4PAKBZifsERVht6umlgjeyx7uqCl6eV/view?usp=drive_link](https://drive.google.com/file/d/1cvgTNA9-ryWHW1Mv9TzxM60FlhNYYJ-k/view?usp=drive_link))**
+🔗 **[Download Text Beans (Development Build)]([https://drive.google.com/file/d/1cvgTNA9-ryWHW1Mv9TzxM60FlhNYYJ-k/view?usp=drive_link])**
 
 If you'd like to contribute, modify, or explore the code:
 1. Download the ZIP file above.  
