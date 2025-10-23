@@ -35,7 +35,7 @@ If you'd like to contribute, modify, or explore the code:
 
 ### 🛠️ Tech Stack
 - **Language:** Java  
-- **Framework:** Java Swing / JavaFX *(depending on your build)*  
+- **Framework:** Java Swing / JavaFX and more 
 - **Platform:** Cross-platform  
 
 ---
