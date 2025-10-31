@@ -1,0 +1,13 @@
+.root {
+    -fx-base: #F0F0F0;
+    /* Light gray base color */
+    -fx-background: #FFFFFF;
+    /* White background */
+    -fx-control-inner-background: #FFFFFF;
+}
+
+.tool-bar {
+    -fx-background-color: -fx-base;
+    -fx-padding: 5;
+    -fx-spacing: 5;
+}
