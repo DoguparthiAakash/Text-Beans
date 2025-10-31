@@ -1,0 +1,34 @@
+/* make most elements dark */
+*:not(script):not(style) {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+    border-color: #333 !important;
+}
+
+/* dim media slightly but preserve color */
+img,
+video,
+canvas,
+iframe {
+    filter: brightness(0.8) !important;
+}
+
+/* links */
+a,
+a:visited {
+    color: #8ab4f8 !important;
+}
+
+/* form controls */
+input,
+textarea,
+select,
+button {
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
+    border-color: #444 !important;
+}
+
+/* override inline whites */
+*[style*="background"] {
+    background-color: unset !important; }
