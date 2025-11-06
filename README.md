@@ -9,7 +9,7 @@
 ---
 
 ### 🚀 Overview
-**Text Beans** is a lightweight yet powerful **Java-based text editor** designed to open, view, and edit *any* file format in one unified environment.  
+**Text Beans** is a lightweight yet powerful **Java-based software** designed to work *any* file format in one unified environment.  
 From code files to documents, Text Beans brings flexibility, simplicity, and versatility together.
 
 ---
