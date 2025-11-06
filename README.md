@@ -4,7 +4,7 @@
 
 <h1 align="center">Text Beans</h1>
 
-<p align="center"><em>A universal An all in one software for all kind of file formates* built with Java — view and edit any file format in one place.</em></p>
+<p align="center"><em>A universal all in one software for all* built with Java — all works in one place.</em></p>
 
 ---
 
