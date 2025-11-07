@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Text Beans — Integrated Software Suite</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/DoguparthiAakash/Text-Beans/main/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Raleway:wght@300;400;700&family=Montserrat:wght@400;600;800&family=Poppins:wght@300;500;700&family=Quicksand:wght@400;600&family=Roboto+Slab:wght@300;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,6 +25,40 @@
       --dark: #1a1a1a;
       --light-gray: #f8f9fa;
       --border: #e0e0e0;
+    }
+
+    /* Header Logo */
+    .header-logo {
+      position: fixed;
+      top: 20px;
+      left: 30px;
+      z-index: 1000;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: white;
+      padding: 5px;
+      box-shadow: 0 4px 15px rgba(255,122,0,0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: header-logo-float 3s ease-in-out infinite;
+    }
+
+    .header-logo:hover {
+      transform: scale(1.2) rotate(10deg);
+      box-shadow: 0 8px 25px rgba(255,122,0,0.4);
+      animation: none;
+    }
+
+    @keyframes header-logo-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .header-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
     }
 
     /* Hero Section */
@@ -100,17 +135,22 @@
     }
 
     .logo {
-      width: 140px;
-      height: 140px;
+      width: 180px;
+      height: 180px;
       margin: 0 auto 30px;
       animation: logo-entrance 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       filter: drop-shadow(0 10px 30px rgba(255,122,0,0.3));
       transition: all 0.5s ease;
+      border-radius: 25px;
+      background: white;
+      padding: 15px;
+      box-shadow: 0 10px 40px rgba(255,122,0,0.2);
     }
 
     .logo:hover {
       transform: scale(1.1) rotate(5deg);
       filter: drop-shadow(0 15px 40px rgba(255,122,0,0.5));
+      box-shadow: 0 15px 50px rgba(255,122,0,0.3);
     }
 
     @keyframes logo-entrance {
@@ -637,6 +677,16 @@
       .hero { padding: 40px 15px; }
       h2::before, h2::after { display: none; }
       .section-intro { white-space: normal; animation: none !important; }
+      .header-logo {
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+      }
+      .logo {
+        width: 140px;
+        height: 140px;
+      }
     }
 
     /* Smooth Scrollbar */
@@ -652,6 +702,11 @@
   </style>
 </head>
 <body>
+  <!-- Header Logo -->
+  <a href="#" class="header-logo">
+    <img src="https://raw.githubusercontent.com/DoguparthiAakash/Text-Beans/main/logo.png" alt="Text Beans Logo">
+  </a>
+
   <!-- Hero Section -->
   <div class="hero">
     <div class="particle"></div>
@@ -846,6 +901,12 @@
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
+    });
+
+    // Header logo scroll to top
+    document.querySelector('.header-logo').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
 </body>
