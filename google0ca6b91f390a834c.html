@@ -1,1 +1,481 @@
-google-site-verification: google0ca6b91f390a834c.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text Beans — Integrated Software Suite</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Arial', 'Helvetica', sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      line-height: 1.6;
+    }
+
+    :root {
+      --accent: #ff7a00;
+      --accent-light: #ff9c43;
+      --accent-dark: #e66d00;
+      --dark: #1a1a1a;
+      --light-gray: #f8f9fa;
+      --border: #e0e0e0;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fff 0%, #ffe8d2 50%, #ffd4a8 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,122,0,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      top: -200px;
+      right: -200px;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,122,0,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      bottom: -150px;
+      left: -150px;
+      animation: float 15s infinite ease-in-out reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, 30px) scale(1.1); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px;
+      animation: fadeUp 0.8s ease;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0;
+      margin-bottom: 20px;
+      animation: fadeUp 1s ease;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+      font-family: 'Arial', sans-serif;
+    }
+
+    .subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: #444;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+      animation: fadeUp 1.3s ease;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 18px 50px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 30px rgba(255,122,0,0.3);
+      animation: fadeUp 1.6s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(255,122,0,0.4);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Styling */
+    section {
+      padding: 100px 8%;
+      position: relative;
+    }
+
+    section:nth-child(even) {
+      background: var(--light-gray);
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .section-intro {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto 60px;
+      line-height: 1.8;
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 35px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-left: 5px solid var(--accent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255,122,0,0.05) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 12px 40px rgba(255,122,0,0.15);
+      border-left-width: 8px;
+    }
+
+    .card h3 {
+      font-size: 1.6rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card p {
+      color: #555;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(255,122,0,0.25);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: white;
+      text-align: center;
+      padding: 60px 20px 40px;
+      margin-top: 0;
+    }
+
+    .footer-quote {
+      font-size: 1.3rem;
+      font-style: italic;
+      margin-bottom: 25px;
+      opacity: 0.9;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .footer-copyright {
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+
+    .github-link {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 30px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .github-link:hover {
+      background: var(--accent-light);
+      transform: scale(1.05);
+    }
+
+    /* Scroll Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      section { padding: 60px 5%; }
+      .grid { grid-template-columns: 1fr; gap: 20px; }
+      .hero { padding: 40px 15px; }
+    }
+
+    /* Smooth Scrollbar */
+    ::-webkit-scrollbar { width: 12px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { 
+      background: var(--accent); 
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-dark); }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-content">
+      <img src="https://raw.githubusercontent.com/DoguparthiAakash/Text-Beans/main/logo.png" alt="Text Beans Logo" class="logo" onerror="this.style.display='none'" />
+      <h1>TEXT BEANS</h1>
+      <p class="subtitle">An integrated software suite designed for productivity, performance, and simplicity — inspired by your workflow, powered by innovation.</p>
+      <a href="https://github.com/DoguparthiAakash/Text-Beans" class="cta-button" target="_blank" rel="noopener">Explore on GitHub</a>
+    </div>
+  </div>
+
+  <!-- Problems Section -->
+  <section id="problems">
+    <h2>Problems Users Face</h2>
+    <p class="section-intro">Modern workflows are fragmented and inefficient. Here's what users struggle with daily:</p>
+    <div class="grid">
+      <div class="card reveal">
+        <div class="card-icon">🔧</div>
+        <h3>Multiple Tools</h3>
+        <p>Users depend on separate apps for editing, compression, browsing, and file management, creating a fragmented experience.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">⚡</div>
+        <h3>High Resource Usage</h3>
+        <p>Heavy applications slow down devices, drain memory, and reduce overall system performance.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">⏱️</div>
+        <h3>Low Productivity</h3>
+        <p>Constantly switching between tools breaks workflow concentration and wastes valuable time.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🔗</div>
+        <h3>No Integration</h3>
+        <p>Applications don't share data or operate together efficiently, requiring manual transfers.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">💻</div>
+        <h3>Poor Portability</h3>
+        <p>Most tools work only on specific operating systems, limiting flexibility and accessibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions Section -->
+  <section>
+    <h2>Proposed Solutions</h2>
+    <p class="section-intro">Text Beans reimagines productivity software with a unified, efficient approach:</p>
+    <div class="grid">
+      <div class="card reveal">
+        <div class="card-icon">🎯</div>
+        <h3>All-in-One Platform</h3>
+        <p>Everything you need — text editing, compression, file browsing, and more — integrated inside one cohesive suite.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🚀</div>
+        <h3>Lightweight & Fast</h3>
+        <p>Built with efficient Java backend and LZMA compression technology for optimal performance.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🔄</div>
+        <h3>Unified Workflow</h3>
+        <p>Eliminate app switching — all tools share the same intuitive dashboard and workspace.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🌐</div>
+        <h3>Cross-Platform</h3>
+        <p>Runs smoothly on Windows, macOS, and Linux with consistent experience across all platforms.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section>
+    <h2>Key Features</h2>
+    <p class="section-intro">Powerful tools that work together seamlessly to enhance your productivity:</p>
+    <div class="grid">
+      <div class="card reveal">
+        <div class="card-icon">✍️</div>
+        <h3>Smart Text Editor</h3>
+        <p>Clean, fast, distraction-free writing environment with syntax highlighting and intelligent formatting.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">📊</div>
+        <h3>PPT Builder</h3>
+        <p>Create professional presentations directly inside Text Beans without external software.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🎨</div>
+        <h3>Drawing Board</h3>
+        <p>Sketch diagrams, take visual notes, and create illustrations with a versatile free-form canvas.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">📁</div>
+        <h3>File Manager</h3>
+        <p>Browse, organize, open, compress, and manage all your files from a single interface.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🗜️</div>
+        <h3>LZMA Compression</h3>
+        <p>Advanced compression engine to store more while using significantly less disk space.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🔧</div>
+        <h3>Integrated Workspace</h3>
+        <p>Built-in browser, Excel-like spreadsheet, and compiler — all working together seamlessly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Future Development Section -->
+  <section>
+    <h2>Future Development</h2>
+    <p class="section-intro">Exciting features on the roadmap to make Text Beans even more powerful:</p>
+    <div class="grid">
+      <div class="card reveal">
+        <div class="card-icon">☁️</div>
+        <h3>Cloud Sync</h3>
+        <p>Access all your files from anywhere with seamless cloud synchronization across devices.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🤖</div>
+        <h3>AI Assistance</h3>
+        <p>Intelligent writing suggestions, code completion, and smart productivity enhancements.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">👥</div>
+        <h3>Real-Time Collaboration</h3>
+        <p>Work together with team members, editing documents simultaneously in real-time.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🧩</div>
+        <h3>Plugin Store</h3>
+        <p>Extend functionality with community-created plugins and custom modules.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">📱</div>
+        <h3>Mobile Version</h3>
+        <p>Take Text Beans with you — full-featured Android and iOS applications.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p class="footer-quote">"Innovation begins with encouragement, and together, we code the future."</p>
+    <a href="https://github.com/DoguparthiAakash/Text-Beans" class="github-link" target="_blank" rel="noopener">View Project on GitHub</a>
+    <p class="footer-copyright">© 2025 Text Beans Project</p>
+  </footer>
+
+  <script>
+    // Scroll reveal animation
+    const reveals = document.querySelectorAll('.reveal');
+    
+    function revealOnScroll() {
+      reveals.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        if (rect.top < windowHeight - 80) {
+          element.classList.add('visible');
+        }
+      });
+    }
+
+    // Initial check and scroll listener
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+    revealOnScroll();
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
