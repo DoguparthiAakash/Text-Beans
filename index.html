@@ -9,18 +9,6 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-      background: #000000;
-      color: #1d1d1f;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      transition: all 0.5s ease;
-    }
-
     :root {
       --accent: #007AFF;
       --accent-light: #5AC8FA;
@@ -38,6 +26,7 @@
       --shadow-hover: rgba(0, 0, 0, 0.15);
       --gradient-start: #667eea;
       --gradient-end: #764ba2;
+      --accent-rgb: 0, 122, 255;
     }
 
     /* Dark Theme */
@@ -57,15 +46,117 @@
       --gradient-end: #3d2153;
     }
 
-    body.dark .blur-overlay {
-      background: rgba(20, 20, 20, 0.5);
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      background: #000000;
+      color: var(--text-primary);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: all 0.5s ease;
     }
 
-    body.dark .macos-bg {
-      filter: brightness(0.6);
+    /* Mobile Menu */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 1002;
+      position: relative;
     }
 
-    /* Theme Switcher Bubble */
+    .mobile-menu-toggle span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: var(--text-primary);
+      margin: 3px 0;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-glass);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mobile-menu.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      text-align: center;
+    }
+
+    .mobile-nav-link {
+      display: block;
+      padding: 20px;
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .mobile-nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .mobile-nav-link:hover::after,
+    .mobile-nav-link:focus::after {
+      width: 50px;
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link:focus {
+      color: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    /* Theme Switcher */
     .theme-switcher {
       position: fixed;
       top: 80px;
@@ -223,466 +314,6 @@
       transform: scale(1.2) rotate(5deg);
     }
 
-    /* ============= macOS Theme ============= */
-    body.macos {
-      --accent: #007AFF;
-      --accent-light: #5AC8FA;
-      --accent-dark: #0051D5;
-      --accent-rgb: 0, 122, 255;
-      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', sans-serif;
-    }
-
-    .macos .macos-bg {
-      background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-      background-size: 400% 400%;
-      animation: macos-gradient 20s ease infinite;
-    }
-
-    .macos .dock {
-      bottom: 20px;
-      left: 50%;
-      top: auto;
-      transform: translateX(-50%);
-      flex-direction: row;
-      padding: 12px 20px;
-      background: var(--bg-glass);
-      border-radius: 20px;
-      border: 1px solid var(--border);
-    }
-
-    .macos .dock-item {
-      border-radius: 12px;
-    }
-
-    .macos .dock-item:hover {
-      transform: scale(1.5) translateY(-10px);
-    }
-
-    .macos .dock-item.active::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 4px;
-      height: 4px;
-      background: var(--accent);
-      border-radius: 50%;
-      top: auto;
-    }
-
-    .macos .hero-window {
-      border-radius: 20px;
-      box-shadow: 0 25px 80px var(--shadow-hover);
-    }
-
-    .macos .window-controls {
-      left: 20px;
-      right: auto;
-      top: 20px;
-      flex-direction: row;
-      gap: 8px;
-    }
-
-    .macos .window-control {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: none;
-    }
-
-    .macos .window-control.close { 
-      background: #ff5f57;
-      order: 1;
-    }
-    .macos .window-control.minimize { 
-      background: #ffbd2e;
-      order: 2;
-    }
-    .macos .window-control.maximize { 
-      background: #28ca42;
-      order: 3;
-    }
-
-    .macos .window-control::after {
-      display: none;
-    }
-
-    .macos .card, .macos .navbar {
-      border-radius: 20px;
-    }
-
-    .macos .cta-button, .macos .github-link {
-      border-radius: 12px;
-    }
-
-    /* ============= Windows Theme ============= */
-    body.windows {
-      --accent: #0078D4;
-      --accent-light: #00A2ED;
-      --accent-dark: #005A9E;
-      --accent-rgb: 0, 120, 212;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body.windows:root {
-      --gradient-start: #0078D4;
-      --gradient-end: #00A2ED;
-    }
-
-    .windows .macos-bg {
-      background: linear-gradient(135deg, #0078D4 0%, #00A2ED 50%, #0078D4 100%);
-      background-size: 400% 400%;
-      animation: windows-gradient 15s ease infinite;
-    }
-
-    .windows .dock {
-      bottom: 0;
-      left: 0;
-      top: auto;
-      transform: none;
-      flex-direction: row;
-      padding: 0;
-      background: var(--bg-glass);
-      border-radius: 0;
-      width: 100%;
-      height: 60px;
-      justify-content: center;
-      border-top: 1px solid var(--border);
-      box-shadow: 0 -4px 20px var(--shadow);
-    }
-
-    .windows .dock-item {
-      border-radius: 0;
-      position: relative;
-      padding: 5px;
-    }
-
-    .windows .dock-item::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .windows .dock-item:hover {
-      transform: scale(1.1);
-      background: rgba(var(--accent-rgb), 0.1);
-    }
-
-    .windows .dock-item.active::before {
-      transform: scaleX(1);
-    }
-
-    .windows .dock-item.active::after {
-      display: none;
-    }
-
-    .windows .hero-window {
-      border-radius: 8px;
-      box-shadow: 0 0 0 1px var(--border), 0 10px 40px var(--shadow-hover);
-      border: 1px solid var(--border);
-    }
-
-    .windows .window-controls {
-      right: 0;
-      left: auto;
-      top: 0;
-      gap: 0;
-      flex-direction: row;
-    }
-
-    .windows .window-control {
-      width: 46px;
-      height: 32px;
-      border-radius: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      background: transparent;
-      border: none;
-    }
-
-    .windows .window-control.minimize {
-      order: 1;
-    }
-
-    .windows .window-control.maximize {
-      order: 2;
-    }
-
-    .windows .window-control.close {
-      order: 3;
-    }
-
-    .windows .window-control::after {
-      content: '';
-      position: absolute;
-      color: var(--text-primary);
-    }
-
-    .windows .window-control.minimize::after {
-      content: '─';
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .windows .window-control.maximize::after {
-      content: '□';
-      font-size: 14px;
-    }
-
-    .windows .window-control.close::after {
-      content: '✕';
-      font-size: 14px;
-    }
-
-    .windows .window-control.minimize:hover,
-    .windows .window-control.maximize:hover {
-      background: rgba(var(--accent-rgb), 0.1);
-    }
-
-    .windows .window-control.close:hover {
-      background: #e81123;
-    }
-
-    .windows .window-control.close:hover::after {
-      color: white;
-    }
-
-    .windows .card, .windows .navbar, .windows footer {
-      border-radius: 8px;
-    }
-
-    .windows .cta-button, .windows .github-link {
-      border-radius: 4px;
-    }
-
-    /* ============= Linux Theme ============= */
-    body.linux {
-      --accent: #FF6C00;
-      --accent-light: #FF8C42;
-      --accent-dark: #E65100;
-      --accent-rgb: 255, 108, 0;
-      font-family: 'Ubuntu', 'Inter', sans-serif;
-    }
-
-    body.linux:root {
-      --gradient-start: #DD4814;
-      --gradient-end: #FF6C00;
-    }
-
-    .linux .macos-bg {
-      background: linear-gradient(135deg, #DD4814 0%, #FF6C00 50%, #DD4814 100%);
-      background-size: 400% 400%;
-      animation: linux-gradient 18s ease infinite;
-    }
-
-    .linux .dock {
-      left: 0;
-      top: 50%;
-      bottom: auto;
-      transform: translateY(-50%);
-      flex-direction: column;
-      padding: 15px 8px;
-      background: var(--bg-glass);
-      border-radius: 0 12px 12px 0;
-      border-right: 1px solid var(--border);
-      box-shadow: 2px 0 20px var(--shadow);
-      width: 70px;
-      height: auto;
-    }
-
-    .linux .dock-item {
-      border-radius: 8px;
-      position: relative;
-    }
-
-    .linux .dock-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: var(--accent);
-      transform: scaleY(0);
-      transition: transform 0.3s ease;
-      border-radius: 0 4px 4px 0;
-    }
-
-    .linux .dock-item:hover {
-      transform: scale(1.2);
-      background: rgba(var(--accent-rgb), 0.1);
-    }
-
-    .linux .dock-item.active::before {
-      transform: scaleY(1);
-    }
-
-    .linux .dock-item.active::after {
-      display: none;
-    }
-
-    .linux .hero-window {
-      border-radius: 12px 12px 8px 8px;
-      box-shadow: 0 15px 60px var(--shadow-hover);
-      border: 1px solid var(--border);
-    }
-
-    .linux .window-controls {
-      right: 20px;
-      left: auto;
-      top: 20px;
-      gap: 8px;
-      flex-direction: row;
-    }
-
-    .linux .window-control {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-    }
-
-    .linux .window-control.minimize {
-      order: 1;
-    }
-
-    .linux .window-control.maximize {
-      order: 2;
-    }
-
-    .linux .window-control.close {
-      order: 3;
-    }
-
-    .linux .window-control.close { background: #FC614D; }
-    .linux .window-control.minimize { background: #FDBC40; }
-    .linux .window-control.maximize { background: #34C748; }
-
-    .linux .window-control::after {
-      display: none;
-    }
-
-    .linux .card {
-      border-radius: 8px;
-    }
-
-    .linux .navbar {
-      border-radius: 0;
-    }
-
-    .linux .cta-button, .linux .github-link {
-      border-radius: 6px;
-    }
-
-    /* Window Animations */
-    @keyframes window-close {
-      0% { 
-        opacity: 1; 
-        transform: scale(1) rotate(0deg); 
-      }
-      50% {
-        opacity: 0.5;
-        transform: scale(0.9) rotate(5deg);
-      }
-      100% { 
-        opacity: 0; 
-        transform: scale(0.1) rotate(180deg); 
-      }
-    }
-
-    @keyframes window-minimize {
-      0% { 
-        opacity: 1; 
-        transform: scale(1) translateY(0); 
-      }
-      100% { 
-        opacity: 0; 
-        transform: scale(0.05) translateY(150vh); 
-      }
-    }
-
-    @keyframes window-restore {
-      0% { 
-        opacity: 0; 
-        transform: scale(0.05) translateY(150vh); 
-      }
-      100% { 
-        opacity: 1; 
-        transform: scale(1) translateY(0); 
-      }
-    }
-
-    @keyframes window-maximize {
-      0% {
-        max-width: 900px;
-        width: 900px;
-      }
-      100% {
-        max-width: 95vw;
-        width: 95vw;
-      }
-    }
-
-    @keyframes window-restore-size {
-      0% {
-        max-width: 95vw;
-        width: 95vw;
-      }
-      100% {
-        max-width: 900px;
-        width: 900px;
-      }
-    }
-
-    .hero-window.closing {
-      animation: window-close 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-    }
-
-    .hero-window.minimizing {
-      animation: window-minimize 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-    }
-
-    .hero-window.restoring {
-      animation: window-restore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .hero-window.maximizing {
-      animation: window-maximize 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .hero-window.restoring-size {
-      animation: window-restore-size 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .hero-window.maximized {
-      max-width: 95vw !important;
-      width: 95vw !important;
-    }
-
-    @keyframes macos-gradient {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    @keyframes windows-gradient {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    @keyframes linux-gradient {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
     /* Base Styles */
     .macos-bg {
       position: fixed;
@@ -692,6 +323,14 @@
       height: 100%;
       z-index: -2;
       transition: all 0.5s ease;
+      background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+      background-size: 400% 400%;
+      animation: gradient-shift 20s ease infinite;
+    }
+
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .blur-overlay {
@@ -707,6 +346,10 @@
       transition: all 0.5s ease;
     }
 
+    body.dark .blur-overlay {
+      background: rgba(20, 20, 20, 0.5);
+    }
+
     .dock {
       position: fixed;
       z-index: 1000;
@@ -716,6 +359,14 @@
       -webkit-backdrop-filter: blur(20px);
       animation: dock-slide-up 1s cubic-bezier(0.34, 1.56, 0.64, 1);
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      flex-direction: row;
+      padding: 12px 20px;
+      background: var(--bg-glass);
+      border-radius: 20px;
+      border: 1px solid var(--border);
     }
 
     @keyframes dock-slide-up {
@@ -732,6 +383,7 @@
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
+      border-radius: 12px;
     }
 
     .dock-item img {
@@ -741,6 +393,23 @@
       object-fit: cover;
       pointer-events: none;
       transition: all 0.3s ease;
+    }
+
+    .dock-item:hover {
+      transform: scale(1.5) translateY(-10px);
+    }
+
+    .dock-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      top: auto;
     }
 
     .navbar {
@@ -859,11 +528,14 @@
       -webkit-backdrop-filter: blur(20px);
       padding: 60px;
       max-width: 900px;
+      width: 90%;
       animation: hero-window-appear 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       overflow: hidden;
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 25px 80px var(--shadow-hover);
     }
 
     @keyframes hero-window-appear {
@@ -877,12 +549,34 @@
       display: flex;
       transition: all 0.5s ease;
       z-index: 10;
+      left: 20px;
+      right: auto;
+      top: 20px;
+      flex-direction: row;
+      gap: 8px;
     }
 
     .window-control {
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: none;
+    }
+
+    .window-control.close { 
+      background: #ff5f57;
+      order: 1;
+    }
+    .window-control.minimize { 
+      background: #ffbd2e;
+      order: 2;
+    }
+    .window-control.maximize { 
+      background: #28ca42;
+      order: 3;
     }
 
     .window-control:hover {
@@ -916,7 +610,7 @@
     }
 
     h1 {
-      font-size: clamp(3rem, 8vw, 5rem);
+      font-size: clamp(2.5rem, 8vw, 5rem);
       color: var(--text-primary);
       font-weight: 800;
       letter-spacing: -2px;
@@ -935,7 +629,7 @@
     }
 
     .subtitle {
-      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
       color: var(--text-secondary);
       max-width: 600px;
       margin: 0 auto 40px;
@@ -959,6 +653,7 @@
       animation: hero-text-appear 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s both;
       position: relative;
       overflow: hidden;
+      border-radius: 12px;
     }
 
     .cta-button::before {
@@ -1011,7 +706,7 @@
     }
 
     h2 {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-size: clamp(2rem, 5vw, 3.5rem);
       color: var(--text-primary);
       font-weight: 700;
       letter-spacing: -1px;
@@ -1019,7 +714,7 @@
     }
 
     .section-intro {
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
       color: var(--text-secondary);
       max-width: 700px;
       margin: 0 auto;
@@ -1029,7 +724,7 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
       margin-top: 50px;
     }
@@ -1044,6 +739,7 @@
       position: relative;
       overflow: hidden;
       border: 1px solid var(--border);
+      border-radius: 20px;
     }
 
     .card::before {
@@ -1133,9 +829,9 @@
     }
 
     #problems .card-icon { background: linear-gradient(135deg, #FF3B30, #FF9F0A); }
-    section:nth-child(4) .card-icon { background: linear-gradient(135deg, #30D158, #32D74B); }
-    section:nth-child(5) .card-icon { background: linear-gradient(135deg, #AF52DE, #BF5AF2); }
-    section:nth-child(6) .card-icon { background: linear-gradient(135deg, #007AFF, #5AC8FA); }
+    #solutions .card-icon { background: linear-gradient(135deg, #30D158, #32D74B); }
+    #features .card-icon { background: linear-gradient(135deg, #AF52DE, #BF5AF2); }
+    #future .card-icon { background: linear-gradient(135deg, #007AFF, #5AC8FA); }
 
     footer {
       background: var(--bg-glass);
@@ -1154,7 +850,7 @@
     }
 
     .footer-quote {
-      font-size: 1.4rem;
+      font-size: clamp(1.2rem, 3vw, 1.4rem);
       color: var(--text-primary);
       margin-bottom: 30px;
       font-weight: 600;
@@ -1172,6 +868,7 @@
       margin-bottom: 20px;
       position: relative;
       overflow: hidden;
+      border-radius: 12px;
     }
 
     .github-link::before {
@@ -1214,10 +911,123 @@
       transform: translateY(0);
     }
 
+    /* Window Animations */
+    @keyframes window-close {
+      0% { 
+        opacity: 1; 
+        transform: scale(1) rotate(0deg); 
+      }
+      50% {
+        opacity: 0.5;
+        transform: scale(0.9) rotate(5deg);
+      }
+      100% { 
+        opacity: 0; 
+        transform: scale(0.1) rotate(180deg); 
+      }
+    }
+
+    @keyframes window-minimize {
+      0% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+      }
+      100% { 
+        opacity: 0; 
+        transform: scale(0.05) translateY(150vh); 
+      }
+    }
+
+    @keyframes window-restore {
+      0% { 
+        opacity: 0; 
+        transform: scale(0.05) translateY(150vh); 
+      }
+      100% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+      }
+    }
+
+    @keyframes window-maximize {
+      0% {
+        max-width: 900px;
+        width: 900px;
+      }
+      100% {
+        max-width: 95vw;
+        width: 95vw;
+      }
+    }
+
+    @keyframes window-restore-size {
+      0% {
+        max-width: 95vw;
+        width: 95vw;
+      }
+      100% {
+        max-width: 900px;
+        width: 900px;
+      }
+    }
+
+    .hero-window.closing {
+      animation: window-close 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+
+    .hero-window.minimizing {
+      animation: window-minimize 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+
+    .hero-window.restoring {
+      animation: window-restore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .hero-window.maximizing {
+      animation: window-maximize 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .hero-window.restoring-size {
+      animation: window-restore-size 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .hero-window.maximized {
+      max-width: 95vw !important;
+      width: 95vw !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .hero-window {
+        padding: 40px;
+      }
+      
+      .card {
+        padding: 30px;
+      }
+      
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+    }
+
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hero-window { padding: 40px 30px; }
-      .grid { grid-template-columns: 1fr; }
+      .nav-links { 
+        display: none; 
+      }
+      
+      .mobile-menu-toggle {
+        display: flex;
+      }
+      
+      .hero-window { 
+        padding: 30px 20px; 
+        margin: 0 15px;
+      }
+      
+      .grid { 
+        grid-template-columns: 1fr; 
+      }
       
       .theme-switcher { 
         top: auto;
@@ -1229,49 +1039,102 @@
         flex-direction: column;
       }
       
-      .macos .dock { 
+      .dock { 
         padding: 8px 15px; 
+        bottom: 10px;
       }
       
-      .macos .dock-item { 
+      .dock-item { 
         width: 40px; 
         height: 40px; 
       }
       
-      .macos .dock-item img { 
+      .dock-item img { 
         width: 32px; 
         height: 32px; 
       }
       
-      .linux .dock {
-        left: 50%;
-        bottom: 20px;
-        top: auto;
-        transform: translateX(-50%);
-        flex-direction: row;
-        width: auto;
-        border-radius: 20px;
+      section {
+        padding: 80px 20px;
       }
       
-      .linux .dock-item::before {
-        left: 0;
-        top: auto;
-        bottom: 0;
-        right: 0;
-        width: auto;
-        height: 4px;
-        transform: scaleX(0);
+      .section-header {
+        margin-bottom: 50px;
       }
       
-      .linux .dock-item.active::before {
-        transform: scaleX(1);
+      .hero {
+        padding: 100px 20px 60px;
       }
-
-      .windows .dock {
-        height: 50px;
+      
+      .footer-quote {
+        font-size: 1.2rem;
+      }
+      
+      .cta-button, .github-link {
+        padding: 14px 30px;
+        font-size: 16px;
       }
     }
 
+    @media (max-width: 480px) {
+      .hero-window {
+        padding: 25px 15px;
+      }
+      
+      .hero-logo {
+        width: 80px;
+        height: 80px;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+      
+      .card {
+        padding: 25px;
+      }
+      
+      .card-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      .card h3 {
+        font-size: 1.3rem;
+      }
+      
+      .footer-quote {
+        font-size: 1.1rem;
+      }
+      
+      .theme-switcher {
+        bottom: 80px;
+        right: 15px;
+      }
+      
+      .theme-toggle-btn, .color-mode-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+      }
+      
+      .theme-menu {
+        right: 50px;
+        min-width: 160px;
+      }
+      
+      .window-controls {
+        left: 15px;
+        top: 15px;
+      }
+    }
+
+    /* Scrollbar */
     ::-webkit-scrollbar { width: 10px; height: 10px; }
     ::-webkit-scrollbar-track { 
       background: var(--bg-secondary);
@@ -1289,7 +1152,17 @@
   <div class="macos-bg"></div>
   <div class="blur-overlay"></div>
 
-  <!-- Theme Switcher Bubble -->
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-nav-links">
+      <li><a href="#problems" class="mobile-nav-link" data-mobile-link>Problems</a></li>
+      <li><a href="#solutions" class="mobile-nav-link" data-mobile-link>Solutions</a></li>
+      <li><a href="#features" class="mobile-nav-link" data-mobile-link>Features</a></li>
+      <li><a href="#future" class="mobile-nav-link" data-mobile-link>Future</a></li>
+    </ul>
+  </div>
+
+  <!-- Theme Switcher -->
   <div class="theme-switcher">
     <div class="theme-controls">
       <button class="color-mode-btn" id="colorModeBtn" title="Toggle Light/Dark Mode">
@@ -1324,6 +1197,11 @@
         <li><a href="#features" class="nav-link">Features</a></li>
         <li><a href="#future" class="nav-link">Future</a></li>
       </ul>
+      <div class="mobile-menu-toggle" id="mobileMenuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   </nav>
 
@@ -1509,6 +1387,25 @@
   </footer>
 
   <script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileNavLinks = document.querySelectorAll('[data-mobile-link]');
+    
+    mobileMenuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+    
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenuToggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
     // Theme Switcher
     const themeToggle = document.getElementById('themeToggle');
     const themeMenu = document.getElementById('themeMenu');
