@@ -1118,7 +1118,216 @@
       transform: translateY(0);
     }
 
-    /* Window Animations */
+    /* OS-SPECIFIC WINDOW ANIMATIONS */
+    
+    /* macOS Animations */
+    .macos .hero-window.minimizing {
+      animation: macos-minimize 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+
+    @keyframes macos-minimize {
+      0% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+      }
+      50% {
+        opacity: 0.7;
+        transform: scale(0.8) translateY(50px);
+      }
+      100% { 
+        opacity: 0; 
+        transform: scale(0.1) translateY(100vh) rotate(-10deg); 
+      }
+    }
+
+    .macos .hero-window.restoring {
+      animation: macos-restore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes macos-restore {
+      0% { 
+        opacity: 0; 
+        transform: scale(0.1) translateY(100vh) rotate(-10deg); 
+      }
+      100% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0) rotate(0deg); 
+      }
+    }
+
+    .macos .hero-window.maximizing {
+      animation: macos-maximize 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes macos-maximize {
+      0% {
+        max-width: 900px;
+        width: 90%;
+        border-radius: 20px;
+      }
+      100% {
+        max-width: 95vw;
+        width: 95vw;
+        border-radius: 0;
+      }
+    }
+
+    .macos .hero-window.restoring-size {
+      animation: macos-restore-size 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes macos-restore-size {
+      0% {
+        max-width: 95vw;
+        width: 95vw;
+        border-radius: 0;
+      }
+      100% {
+        max-width: 900px;
+        width: 90%;
+        border-radius: 20px;
+      }
+    }
+
+    /* Windows Animations */
+    .windows .hero-window.minimizing {
+      animation: windows-minimize 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+
+    @keyframes windows-minimize {
+      0% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+      }
+      100% { 
+        opacity: 0; 
+        transform: scale(0.1) translateY(100vh); 
+      }
+    }
+
+    .windows .hero-window.restoring {
+      animation: windows-restore 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes windows-restore {
+      0% { 
+        opacity: 0; 
+        transform: scale(0.1) translateY(100vh); 
+      }
+      100% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+      }
+    }
+
+    .windows .hero-window.maximizing {
+      animation: windows-maximize 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes windows-maximize {
+      0% {
+        max-width: 900px;
+        width: 90%;
+        border-radius: 8px;
+      }
+      100% {
+        max-width: 98vw;
+        width: 98vw;
+        border-radius: 0;
+      }
+    }
+
+    .windows .hero-window.restoring-size {
+      animation: windows-restore-size 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes windows-restore-size {
+      0% {
+        max-width: 98vw;
+        width: 98vw;
+        border-radius: 0;
+      }
+      100% {
+        max-width: 900px;
+        width: 90%;
+        border-radius: 8px;
+      }
+    }
+
+    /* Linux Animations */
+    .linux .hero-window.minimizing {
+      animation: linux-minimize 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+
+    @keyframes linux-minimize {
+      0% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(0.9) translateY(30px);
+      }
+      100% { 
+        opacity: 0; 
+        transform: scale(0.1) translateY(100vh) rotate(5deg); 
+      }
+    }
+
+    .linux .hero-window.restoring {
+      animation: linux-restore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes linux-restore {
+      0% { 
+        opacity: 0; 
+        transform: scale(0.1) translateY(100vh) rotate(5deg); 
+      }
+      100% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0) rotate(0deg); 
+      }
+    }
+
+    .linux .hero-window.maximizing {
+      animation: linux-maximize 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes linux-maximize {
+      0% {
+        max-width: 900px;
+        width: 90%;
+        border-radius: 12px 12px 8px 8px;
+      }
+      100% {
+        max-width: 96vw;
+        width: 96vw;
+        border-radius: 0;
+      }
+    }
+
+    .linux .hero-window.restoring-size {
+      animation: linux-restore-size 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes linux-restore-size {
+      0% {
+        max-width: 96vw;
+        width: 96vw;
+        border-radius: 0;
+      }
+      100% {
+        max-width: 900px;
+        width: 90%;
+        border-radius: 12px 12px 8px 8px;
+      }
+    }
+
+    /* Common Window Animations */
+    .hero-window.closing {
+      animation: window-close 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+
     @keyframes window-close {
       0% { 
         opacity: 1; 
@@ -1134,73 +1343,83 @@
       }
     }
 
-    @keyframes window-minimize {
-      0% { 
-        opacity: 1; 
-        transform: scale(1) translateY(0); 
-      }
-      100% { 
-        opacity: 0; 
-        transform: scale(0.05) translateY(150vh); 
-      }
-    }
-
-    @keyframes window-restore {
-      0% { 
-        opacity: 0; 
-        transform: scale(0.05) translateY(150vh); 
-      }
-      100% { 
-        opacity: 1; 
-        transform: scale(1) translateY(0); 
-      }
-    }
-
-    @keyframes window-maximize {
-      0% {
-        max-width: 900px;
-        width: 900px;
-      }
-      100% {
-        max-width: 95vw;
-        width: 95vw;
-      }
-    }
-
-    @keyframes window-restore-size {
-      0% {
-        max-width: 95vw;
-        width: 95vw;
-      }
-      100% {
-        max-width: 900px;
-        width: 900px;
-      }
-    }
-
-    .hero-window.closing {
-      animation: window-close 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-    }
-
-    .hero-window.minimizing {
-      animation: window-minimize 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-    }
-
-    .hero-window.restoring {
-      animation: window-restore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .hero-window.maximizing {
-      animation: window-maximize 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .hero-window.restoring-size {
-      animation: window-restore-size 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
     .hero-window.maximized {
       max-width: 95vw !important;
       width: 95vw !important;
+    }
+
+    .windows .hero-window.maximized {
+      max-width: 98vw !important;
+      width: 98vw !important;
+    }
+
+    .linux .hero-window.maximized {
+      max-width: 96vw !important;
+      width: 96vw !important;
+    }
+
+    /* Minimized Window State */
+    .hero-window.minimized {
+      display: none;
+    }
+
+    /* App Windows */
+    .app-window {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 40px;
+      max-width: 800px;
+      width: 80%;
+      box-shadow: 0 25px 80px var(--shadow-hover);
+      border: 1px solid var(--border);
+      z-index: 1005;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .app-window.active {
+      opacity: 1;
+      visibility: visible;
+      animation: app-window-appear 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes app-window-appear {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+      60% { transform: translate(-50%, -50%) scale(1.05); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    .app-window.closing {
+      animation: app-window-close 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+
+    @keyframes app-window-close {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+    }
+
+    .app-content {
+      max-height: 70vh;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    .app-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+
+    .app-content p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 15px;
     }
 
     /* Responsive Design */
@@ -1215,6 +1434,11 @@
       
       .grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+      
+      .app-window {
+        width: 90%;
+        padding: 30px;
       }
     }
 
@@ -1283,6 +1507,11 @@
         padding: 14px 30px;
         font-size: 16px;
       }
+      
+      .app-window {
+        width: 95%;
+        padding: 25px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1340,6 +1569,10 @@
       .window-controls {
         left: 15px;
         top: 15px;
+      }
+      
+      .app-window {
+        padding: 20px;
       }
     }
 
@@ -1400,16 +1633,16 @@
   </nav>
 
   <div class="dock">
-    <div class="dock-item active">
+    <div class="dock-item active" data-app="textbeans">
       <img src="https://raw.githubusercontent.com/DoguparthiAakash/Text-Beans/main/logo.png" alt="Text Beans">
     </div>
-    <div class="dock-item">
+    <div class="dock-item" data-app="github">
       <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
     </div>
-    <div class="dock-item">
+    <div class="dock-item" data-app="code">
       <img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" alt="Code">
     </div>
-    <div class="dock-item">
+    <div class="dock-item" data-app="settings">
       <img src="https://cdn-icons-png.flaticon.com/512/1827/1827425.png" alt="Settings">
     </div>
   </div>
@@ -1425,6 +1658,68 @@
       <h1>Text Beans</h1>
       <p class="subtitle">An integrated software suite designed for productivity, performance, and simplicity — inspired by your workflow, powered by innovation.</p>
       <a href="https://github.com/DoguparthiAakash/Text-Beans" class="cta-button" target="_blank" rel="noopener">Explore on GitHub</a>
+    </div>
+  </div>
+
+  <!-- App Windows -->
+  <div class="app-window" id="githubWindow">
+    <div class="window-controls">
+      <div class="window-control close" data-app="github"></div>
+      <div class="window-control minimize" data-app="github"></div>
+      <div class="window-control maximize" data-app="github"></div>
+    </div>
+    <div class="app-content">
+      <h3>GitHub Repository</h3>
+      <p>Text Beans is an open-source project hosted on GitHub. You can explore the code, contribute to the project, or report issues.</p>
+      <p>Key repository features:</p>
+      <ul>
+        <li>Complete source code available</li>
+        <li>Issue tracking and feature requests</li>
+        <li>Documentation and setup guides</li>
+        <li>Contributor guidelines</li>
+      </ul>
+      <a href="https://github.com/DoguparthiAakash/Text-Beans" class="cta-button" target="_blank" rel="noopener">Visit Repository</a>
+    </div>
+  </div>
+
+  <div class="app-window" id="codeWindow">
+    <div class="window-controls">
+      <div class="window-control close" data-app="code"></div>
+      <div class="window-control minimize" data-app="code"></div>
+      <div class="window-control maximize" data-app="code"></div>
+    </div>
+    <div class="app-content">
+      <h3>Code Editor</h3>
+      <p>Text Beans includes a powerful code editor with syntax highlighting for multiple programming languages.</p>
+      <p>Features:</p>
+      <ul>
+        <li>Syntax highlighting for Java, Python, JavaScript, and more</li>
+        <li>Auto-completion and intelligent suggestions</li>
+        <li>Integrated terminal</li>
+        <li>Git integration</li>
+        <li>Multiple theme options</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="app-window" id="settingsWindow">
+    <div class="window-controls">
+      <div class="window-control close" data-app="settings"></div>
+      <div class="window-control minimize" data-app="settings"></div>
+      <div class="window-control maximize" data-app="settings"></div>
+    </div>
+    <div class="app-content">
+      <h3>Settings & Preferences</h3>
+      <p>Customize Text Beans to match your workflow and preferences.</p>
+      <p>Available settings:</p>
+      <ul>
+        <li>Theme selection (Light/Dark)</li>
+        <li>Font size and family</li>
+        <li>Keyboard shortcuts</li>
+        <li>File associations</li>
+        <li>Plugin management</li>
+        <li>Performance options</li>
+      </ul>
     </div>
   </div>
 
@@ -1671,6 +1966,7 @@
     const maximizeBtn = document.getElementById('maximizeBtn');
     
     let isMaximized = false;
+    let isMinimized = false;
 
     // Close button
     closeBtn.addEventListener('click', () => {
@@ -1690,18 +1986,26 @@
       }, 500);
     });
 
-    // Minimize button
+    // Minimize button - FIXED VERSION
     minimizeBtn.addEventListener('click', () => {
-      heroWindow.classList.add('minimizing');
-      
-      setTimeout(() => {
-        heroWindow.classList.remove('minimizing');
+      if (isMinimized) {
+        // Restore window
+        heroWindow.style.display = 'block';
         heroWindow.classList.add('restoring');
-        
         setTimeout(() => {
           heroWindow.classList.remove('restoring');
         }, 600);
-      }, 1500);
+        isMinimized = false;
+      } else {
+        // Minimize window
+        heroWindow.classList.add('minimizing');
+        
+        setTimeout(() => {
+          heroWindow.classList.remove('minimizing');
+          heroWindow.style.display = 'none';
+          isMinimized = true;
+        }, 600);
+      }
     });
 
     // Maximize button
@@ -1721,6 +2025,74 @@
         }, 400);
         isMaximized = true;
       }
+    });
+
+    // App Windows
+    const appWindows = {
+      'github': document.getElementById('githubWindow'),
+      'code': document.getElementById('codeWindow'),
+      'settings': document.getElementById('settingsWindow')
+    };
+
+    // Dock interactions
+    const dockItems = document.querySelectorAll('.dock-item');
+    dockItems.forEach((item, index) => {
+      item.addEventListener('click', function() {
+        const app = this.dataset.app;
+        
+        // Update active state
+        dockItems.forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Handle app launching
+        if (app === 'textbeans') {
+          // Main window already visible
+          heroWindow.style.display = 'block';
+          heroWindow.classList.add('restoring');
+          setTimeout(() => {
+            heroWindow.classList.remove('restoring');
+          }, 600);
+          isMinimized = false;
+        } else if (app === 'github') {
+          window.open('https://github.com/DoguparthiAakash/Text-Beans', '_blank');
+        } else if (appWindows[app]) {
+          // Show app window
+          appWindows[app].classList.add('active');
+        }
+      });
+    });
+
+    // App window controls
+    document.querySelectorAll('.app-window .window-control').forEach(control => {
+      control.addEventListener('click', function() {
+        const app = this.dataset.app;
+        const window = appWindows[app];
+        const action = Array.from(this.classList).find(cls => 
+          cls === 'close' || cls === 'minimize' || cls === 'maximize'
+        );
+        
+        if (action === 'close') {
+          window.classList.add('closing');
+          setTimeout(() => {
+            window.classList.remove('active', 'closing');
+          }, 400);
+        } else if (action === 'minimize') {
+          window.classList.remove('active');
+        } else if (action === 'maximize') {
+          window.classList.toggle('maximized');
+        }
+      });
+    });
+
+    // Close app windows when clicking outside
+    document.addEventListener('click', (e) => {
+      Object.values(appWindows).forEach(window => {
+        if (window.classList.contains('active') && 
+            !window.contains(e.target) && 
+            !Array.from(dockItems).some(item => item.contains(e.target))) {
+          window.classList.remove('active');
+        }
+      });
     });
 
     // Scroll reveal
@@ -1751,19 +2123,6 @@
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // Dock interactions
-    const dockItems = document.querySelectorAll('.dock-item');
-    dockItems.forEach((item, index) => {
-      item.addEventListener('click', function() {
-        dockItems.forEach(i => i.classList.remove('active'));
-        this.classList.add('active');
-        
-        if (index === 1) {
-          window.open('https://github.com/DoguparthiAakash/Text-Beans', '_blank');
         }
       });
     });
