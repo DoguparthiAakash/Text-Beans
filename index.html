@@ -1975,18 +1975,18 @@
       setTimeout(() => {
         heroWindow.style.display = 'none';
         heroWindow.classList.remove('closing');
+        isMinimized = true;
         
-        setTimeout(() => {
-          heroWindow.style.display = 'block';
-          heroWindow.classList.add('restoring');
-          setTimeout(() => {
-            heroWindow.classList.remove('restoring');
-          }, 600);
-        }, 2000);
+        // Remove active state from textbeans dock item
+        dockItems.forEach(item => {
+          if (item.dataset.app === 'textbeans') {
+            item.classList.remove('active');
+          }
+        });
       }, 500);
     });
 
-    // Minimize button - FIXED VERSION
+    // Minimize button
     minimizeBtn.addEventListener('click', () => {
       if (isMinimized) {
         // Restore window
@@ -2046,13 +2046,15 @@
         
         // Handle app launching
         if (app === 'textbeans') {
-          // Main window already visible
-          heroWindow.style.display = 'block';
-          heroWindow.classList.add('restoring');
-          setTimeout(() => {
-            heroWindow.classList.remove('restoring');
-          }, 600);
-          isMinimized = false;
+          // Toggle main window
+          if (heroWindow.style.display === 'none' || isMinimized) {
+            heroWindow.style.display = 'block';
+            heroWindow.classList.add('restoring');
+            setTimeout(() => {
+              heroWindow.classList.remove('restoring');
+            }, 600);
+            isMinimized = false;
+          }
         } else if (app === 'github') {
           window.open('https://github.com/DoguparthiAakash/Text-Beans', '_blank');
         } else if (appWindows[app]) {
