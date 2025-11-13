@@ -22,17 +22,6 @@ From code files to documents, Text Beans brings flexibility, simplicity, and ver
 - 🔧 **Under active development** — frequent updates with new features and fixes.
 
 ---
-
-### 📦 Download & Development
-🔗 **[Download Text Beans (Development Build)](https://drive.google.com/file/d/1cvgTNA9-ryWHW1Mv9TzxM60FlhNYYJ-k/view?usp=drive_link)**
-
-If you'd like to contribute, modify, or explore the code:
-1. Download the ZIP file above.  
-2. Open the project in your favorite Java IDE (IntelliJ IDEA, Eclipse, or NetBeans).  
-3. Build and run the editor to start customizing.  
-
----
-
 ### 🛠️ Tech Stack
 - **Language:** Java  
 - **Framework:** Java Swing / JavaFX and More 
