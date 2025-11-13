@@ -37,7 +37,7 @@ From code files to documents, Text Beans brings flexibility, simplicity, and ver
 
 ### ❤️ Contributing
 Contributions, suggestions, and feedback are welcome!  
-Feel free to open issues, share ideas, or create pull requests.
+Feel free to open issues, share ideas.
 
 ---
 
